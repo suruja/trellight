@@ -1,0 +1,28 @@
+.container {
+  min-width: 400px;
+}
+
+.column {
+}
+
+.scrollableContainer {
+  position: relative;
+  height: 500px;
+  height: calc(100vh - 108px);
+}
+
+.scrollable {
+  position: absolute;
+  overflow: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  z-index: 1;
+}
+
+.header {
+  z-index: 2;
+  position: relative;
+}
