@@ -1,15 +1,23 @@
 import * as React from 'react'
+import { Droppable } from 'react-beautiful-dnd'
 
 import Card from './Card'
 
 const styles = require('./Column.module.scss')
 
 export interface Props {
+  id: string;
   title: string;
   counter?: number;
 }
 
-function Column({ title, counter = 0 }: Props) {
+const getListStyle = (isDraggingOver : boolean) => ({
+  backgroundColor: isDraggingOver ? 'lightblue' : 'transparent',
+})
+
+function Column({ id, title, counter = 0 }: Props) {
+  const tCounter = Math.floor(Math.random() * Math.floor(15)) + 1
+
   return (
     <div className={`column ${styles.container}`}>
       <div className={`card has-background-light ${styles.column}`}>
@@ -23,19 +31,22 @@ function Column({ title, counter = 0 }: Props) {
             </span>
           </p>
         </header>
-        <div className={`card-content ${styles.scrollableContainer}`}>
-          <div className={styles.scrollable}>
-            <Card name="Alpha" />
-            <Card name="Bravo" />
-            <Card name="Bravo" />
-            <Card name="Bravo" />
-            <Card name="Bravo" />
-            <Card name="Bravo" />
-            <Card name="Bravo" />
-            <Card name="Bravo" />
-            <Card name="Bravo" />
-          </div>
-        </div>
+        <Droppable droppableId={id.toString()}>
+          {(droppableProvided, droppableSnapshot) => (
+            <div
+              ref={droppableProvided.innerRef}
+              style={getListStyle(droppableSnapshot.isDraggingOver)}
+              className={`card-content ${styles.dropzone}`}
+            >
+              <div className={styles.scrollable}>
+                {Array.apply(null, { length: tCounter }).map(Number.call, Number).map(i => (
+                  <Card key={i} id={`${i}`} columnId={id} name={`Card ${i}`} index={i} />
+                ))}
+              </div>
+              {droppableProvided.placeholder}
+            </div>
+          )}
+        </Droppable>
       </div>
     </div>
   )

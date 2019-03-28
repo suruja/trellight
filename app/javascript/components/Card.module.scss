@@ -1,7 +1,14 @@
 .card {
+  user-select: none;
   margin-bottom: 20px;
+  transition: all 0.2s ease;
+  transform: rotate(0);
+}
 
-  &:last-child {
-    margin-bottom: 0;
+.draggable {
+  &.dragging {
+    .card {
+      transform: rotate(2deg);
+    }
   }
 }
