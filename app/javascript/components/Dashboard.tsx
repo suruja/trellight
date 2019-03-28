@@ -1,25 +1,31 @@
 import * as React from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
+import { Column as ColumnType } from '../types/index'
+import { Action } from '../actions/'
 
-import Column from './Column'
+import Column from '../containers/Column'
 
 const styles = require('./Dashboard.module.scss')
 
 export interface Props {
+  columns: Array<ColumnType>,
+  onMoveCard: (object) => Action;
 }
 
-function Dashboard(props: Props) {
+function Dashboard({ columns, onMoveCard }: Props) {
   return (
-    <DragDropContext onDragEnd={(e) => console.log(e)}>
+    <DragDropContext onDragEnd={(e) => onMoveCard({
+      id: parseInt(e.draggableId),
+      srcColumnId: parseInt(e.source.droppableId),
+      srcIndex: e.source.index,
+      destColumnId: parseInt(e.destination.droppableId),
+      destIndex: e.destination.index,
+    })}>
       <div className={styles.dashboard}>
         <div className={`columns ${styles.container}`}>
-          <Column id="1" title="À rencontrer" counter={2} />
-          <Column id="2" title="Entretien" />
-          <Column id="3" title="A" />
-          <Column id="4" title="B" />
-          <Column id="5" title="C" />
-          <Column id="6" title="D" />
-          <Column id="7" title="E" />
+          {columns.map(({ id, title }, i) => (
+            <Column key={i} id={id} title={title} />
+          ))}
         </div>
       </div>
     </DragDropContext>

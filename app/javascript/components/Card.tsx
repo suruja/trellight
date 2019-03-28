@@ -4,15 +4,15 @@ import { Draggable } from 'react-beautiful-dnd'
 const styles = require('./Card.module.scss')
 
 export interface Props {
-  id: string;
-  name: string;
+  id: number;
+  title: string;
   index: number;
-  columnId: string;
+  columnId: number;
 }
 
-function Card({ id, name, index, columnId }: Props) {
+function Card({ id, title, index, columnId }: Props) {
   return (
-    <Draggable draggableId={`${columnId}.${id}`} index={index}>
+    <Draggable draggableId={id} index={index}>
       {(draggableProvided, draggableSnapshot) => (
         <div
           ref={draggableProvided.innerRef}
@@ -23,7 +23,7 @@ function Card({ id, name, index, columnId }: Props) {
           <div className={`card ${styles.card}`}>
             <div className="card-content">
               <div className="content">
-                {name}
+                {title}
               </div>
             </div>
           </div>

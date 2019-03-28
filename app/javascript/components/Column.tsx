@@ -1,23 +1,24 @@
 import * as React from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 
+import { Card as CardType } from '../types/index'
+
 import Card from './Card'
 
 const styles = require('./Column.module.scss')
 
 export interface Props {
-  id: string;
+  id: number;
   title: string;
-  counter?: number;
+  counter: number;
+  cards: Array<CardType>,
 }
 
 const getListStyle = (isDraggingOver : boolean) => ({
   backgroundColor: isDraggingOver ? 'lightblue' : 'transparent',
 })
 
-function Column({ id, title, counter = 0 }: Props) {
-  const tCounter = Math.floor(Math.random() * Math.floor(15)) + 1
-
+function Column({ id, title, counter = 0, cards }: Props) {
   return (
     <div className={`column ${styles.container}`}>
       <div className={`card has-background-light ${styles.column}`}>
@@ -39,8 +40,8 @@ function Column({ id, title, counter = 0 }: Props) {
               className={`card-content ${styles.dropzone}`}
             >
               <div className={styles.scrollable}>
-                {Array.apply(null, { length: tCounter }).map(Number.call, Number).map(i => (
-                  <Card key={i} id={`${i}`} columnId={id} name={`Card ${i}`} index={i} />
+                {cards.map((card, i) => (
+                  <Card key={i} id={card.id} columnId={id} title={card.title} index={card.index} />
                 ))}
               </div>
               {droppableProvided.placeholder}
