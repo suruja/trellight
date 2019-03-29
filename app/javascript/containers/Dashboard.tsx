@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { lifecycle } from 'recompose'
 
 import * as actions from '../actions/'
 import { StoreState } from '../types/index'
@@ -18,7 +19,17 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.CardAction>) {
     onMoveCard: ({ id, srcIndex, srcColumnId, destColumnId, destIndex }) => dispatch(
       actions.moveCard({ id, srcIndex, srcColumnId, destColumnId, destIndex })
     ),
+    onLoad: () => {
+      dispatch(actions.fetchColumns())
+      dispatch(actions.fetchCards())
+    },
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+const LoadingDashboard = lifecycle({
+  componentDidMount() {
+    this.props.onLoad()
+  }
+})(Dashboard)
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoadingDashboard)
