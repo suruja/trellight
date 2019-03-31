@@ -5,21 +5,21 @@ import { Card, Cards, Column, Columns } from '../types'
 export interface MoveCard {
   type: constants.MOVE_CARD;
   id: number;
-  srcIndex: number;
+  srcPosition: number;
   srcColumnId: number;
-  destIndex: number;
+  destPosition: number;
   destColumnId: number;
 }
 
-export function moveCard({ id, srcIndex, srcColumnId, destIndex, destColumnId }:
-  {id: number, srcIndex: number, srcColumnId: number, destIndex: number, destColumnId: number}): MoveCard {
+export function moveCard({ id, srcPosition, srcColumnId, destPosition, destColumnId }:
+  {id: number, srcPosition: number, srcColumnId: number, destPosition: number, destColumnId: number}): MoveCard {
 
   return {
     type: constants.MOVE_CARD,
     id,
-    srcIndex,
+    srcPosition,
     srcColumnId,
-    destIndex,
+    destPosition,
     destColumnId,
   }
 }

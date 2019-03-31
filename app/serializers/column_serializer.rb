@@ -1,3 +1,3 @@
 class ColumnSerializer < ApplicationSerializer
-  attributes :id, :title, :index
+  attributes :id, :title, :position
 end

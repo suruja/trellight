@@ -6,13 +6,13 @@ const styles = require('./Card.module.scss')
 export interface Props {
   id: number;
   title: string;
-  index: number;
+  position: number;
   columnId: number;
 }
 
-function Card({ id, title, index, columnId }: Props) {
+function Card({ id, title, position, columnId }: Props) {
   return (
-    <Draggable draggableId={id} index={index}>
+    <Draggable draggableId={id} index={position}>
       {(draggableProvided, draggableSnapshot) => (
         <div
           ref={draggableProvided.innerRef}

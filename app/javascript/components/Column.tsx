@@ -41,7 +41,7 @@ function Column({ id, title, counter = 0, cards }: Props) {
             >
               <div className={styles.scrollable}>
                 {cards.map((card, i) => (
-                  <Card key={i} id={card.id} columnId={id} title={card.title} index={card.index} />
+                  <Card key={i} id={card.id} columnId={id} title={card.title} position={card.position} />
                 ))}
               </div>
               {droppableProvided.placeholder}

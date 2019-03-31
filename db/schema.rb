@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_28_204350) do
+ActiveRecord::Schema.define(version: 2019_03_29_103548) do
 
   create_table "cards", force: :cascade do |t|
     t.string "title"
-    t.integer "index"
+    t.integer "position"
     t.integer "column_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_03_28_204350) do
 
   create_table "columns", force: :cascade do |t|
     t.string "title"
-    t.integer "index"
+    t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

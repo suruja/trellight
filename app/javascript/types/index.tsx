@@ -1,7 +1,7 @@
 export interface Card {
   id: number;
   title: string;
-  index: number;
+  position: number;
   columnId: number;
 }
 
@@ -12,7 +12,7 @@ export interface Cards {
 export interface Column {
   id: number;
   title: string;
-  index: number;
+  position: number;
 }
 
 export interface Columns {

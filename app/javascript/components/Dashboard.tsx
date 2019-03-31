@@ -17,9 +17,9 @@ function Dashboard({ columns, onMoveCard }: Props) {
     <DragDropContext onDragEnd={(e) => onMoveCard({
       id: parseInt(e.draggableId),
       srcColumnId: parseInt(e.source.droppableId),
-      srcIndex: e.source.index,
+      srcPosition: e.source.index,
       destColumnId: parseInt(e.destination.droppableId),
-      destIndex: e.destination.index,
+      destPosition: e.destination.index,
     })}>
       <div className={styles.dashboard}>
         <div className={`columns ${styles.container}`}>

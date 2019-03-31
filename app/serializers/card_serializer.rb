@@ -1,3 +1,3 @@
 class CardSerializer < ApplicationSerializer
-  attributes :id, :title, :column_id, :index
+  attributes :id, :title, :position, :column_id
 end
