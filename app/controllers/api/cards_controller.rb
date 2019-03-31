@@ -6,19 +6,14 @@ class Api::CardsController < Api::BaseController
 
   def update
     @card = Card.find(params[:id])
-    @card.move(
-      new_position: params[:destPosition],
-      new_column: Column.find(params[:destColumnId]),
+    CardMoverJob.perform_later(
+      card_id: @card.id,
+      session_id: params[:sessionId],
+      src_column_id: params[:srcColumnId],
+      src_position: params[:srcPosition],
+      dest_column_id: params[:destColumnId],
+      dest_position: params[:destPosition],
     )
-    ActionCable.server.broadcast("dashboard", {
-      type: "RECEIVE_MOVE_CARD",
-      id: @card.id,
-      sessionId: params[:sessionId],
-      srcPosition: params[:srcPosition],
-      srcColumnId: params[:srcColumnId],
-      destPosition: params[:destPosition],
-      destColumnId: params[:destColumnId],
-    })
     head :ok
   end
 end
