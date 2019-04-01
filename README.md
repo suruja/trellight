@@ -1,24 +1,39 @@
-# README
+# Trellight
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
 
-Things you may want to cover:
+- Ruby 2.5.3+
+- Node 10.15.3+
 
-* Ruby version
+## Installation
 
-* System dependencies
+```
+git clone git@github.com:suruja/trellight.git
+cd trellight
+bundle install
+bundle exec rails db:setup
+gem install foreman
+cp Procfile.dev.example Procfile.dev
+```
 
-* Configuration
+You may modify the file `Procfile.dev` to match your system needs.
 
-* Database creation
+### Usage
 
-* Database initialization
+```
+foreman start -f Procfile.dev
+```
 
-* How to run the test suite
+### Test
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Server-side
 
-* Deployment instructions
+```
+bundle exec rails test
+```
 
-* ...
+#### Client-side
+
+```
+yarn test
+```
