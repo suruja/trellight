@@ -6,7 +6,9 @@
     = csp_meta_tag
     %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
     %meta{name: "sessionid", content: generate_session_id}
+    = action_cable_meta_tag
     = javascript_pack_tag    'application'
+    = stylesheet_pack_tag    'application'
     = javascript_include_tag "https://use.fontawesome.com/releases/v5.3.1/js/all.js", defer: true
   %body
     = yield
