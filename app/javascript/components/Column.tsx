@@ -21,7 +21,7 @@ const getListStyle = (isDraggingOver : boolean) => ({
 function Column({ id, title, counter = 0, cards }: Props) {
   return (
     <div className={`column ${styles.container}`}>
-      <div className={`card has-background-light ${styles.column}`}>
+      <div className={`card has-background-light`}>
         <header className={`card-header ${styles.header}`}>
           <p className="card-header-title">
             {title}
