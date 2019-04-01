@@ -8,6 +8,7 @@
     "@types/react": "^16.8.9",
     "@types/react-dom": "^16.8.3",
     "@types/react-redux": "^7.0.5",
+    "@types/jest": "*",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bulma": "^0.7.4",
     "cross-fetch": "^3.0.2",
@@ -23,13 +24,12 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "ts-loader": "^5.3.3",
-    "typescript": "^3.3.4000"
-  },
-  "devDependencies": {
-    "@types/jest": "*",
+    "typescript": "^3.3.4000",
     "babel-jest": "*",
     "jest": "^24.5.0",
-    "ts-jest": "^24.0.1",
+    "ts-jest": "^24.0.1"
+  },
+  "devDependencies": {
     "webpack-dev-server": "^3.2.1"
   },
   "scripts": {
