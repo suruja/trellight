@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import _ from 'lodash'
+import * as _ from 'lodash'
 import { lifecycle } from 'recompose'
 
 import * as actions from '../actions/'
@@ -17,7 +17,7 @@ export function mapStateToProps({ columns }: StoreState) {
 export function mapDispatchToProps(dispatch: Dispatch<actions.CardAction>) {
   return {
     onMoveCard: ({ id, srcPosition, srcColumnId, destColumnId, destPosition }) => {
-      dispatch(actions.moveCard({ id, srcPosition, srcColumnId, destColumnId, destPosition }))
+      dispatch(actions.moveAndUpdateCard({ id, srcPosition, srcColumnId, destColumnId, destPosition }))
     },
     onLoad: () => {
       dispatch(actions.fetchColumns())

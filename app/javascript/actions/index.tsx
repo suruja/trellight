@@ -11,6 +11,17 @@ export interface MoveCard {
   destColumnId: number;
 }
 
+export interface ReceiveMoveCard {
+  type: constants.RECEIVE_MOVE_CARD;
+  id: number;
+  srcPosition: number;
+  srcColumnId: number;
+  destPosition: number;
+  destColumnId: number;
+  sessionId: string;
+}
+
+
 export function moveCard({ id, srcPosition, srcColumnId, destPosition, destColumnId }:
   {id: number, srcPosition: number, srcColumnId: number, destPosition: number, destColumnId: number}): MoveCard {
 
@@ -50,6 +61,36 @@ export function fetchCards(): any {
   }
 }
 
+export function updateCard({ id, srcPosition, srcColumnId, destPosition, destColumnId }:
+  {id: number, srcPosition: number, srcColumnId: number, destPosition: number, destColumnId: number}): any {
+  return (dispatch): any => {
+    fetch(`/api/cards/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        sessionId: constants.SESSION_ID,
+        srcPosition,
+        srcColumnId,
+        destPosition,
+        destColumnId,
+      }),
+    })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+}
+
+export function moveAndUpdateCard(args): any {
+  return (dispatch): any => {
+    dispatch(moveCard(args))
+    dispatch(updateCard(args))
+  }
+}
+
 export interface FetchColumns {
   type: constants.FETCH_COLUMNS;
   columns: Array<Column>;
@@ -76,8 +117,10 @@ export function fetchColumns(): any {
   }
 }
 
-export type CardAction = MoveCard | FetchColumns | FetchCards
+export type MoveCardAction = ReceiveMoveCard | MoveCard
 
-export type ColumnAction = MoveCard | FetchColumns | FetchCards
+export type CardAction = MoveCardAction | FetchCards
+
+export type ColumnAction = FetchColumns
 
 export type Action = CardAction | ColumnAction
